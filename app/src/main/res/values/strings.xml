@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NestenBook</string>
+    <string name="selected_item">Selected item:</string>
+
+    <string-array name="Courses">
+        <item>Infosys</item>
+        <item>Infomatik</item>
+        <item>DM</item>
+        <item>Ingeniør</item>
+    </string-array>
+</resources>
