@@ -1,13 +1,14 @@
 package com.example.nestenbook
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.AsyncTask
 import android.os.Bundle
-import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_register_screen.*
+
 
 class RegisterScreen : AppCompatActivity() {
 
@@ -26,7 +27,6 @@ class RegisterScreen : AppCompatActivity() {
         spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Implement if needed")
             }
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -40,10 +40,10 @@ class RegisterScreen : AppCompatActivity() {
             val surname = registerSurname.text.toString()
             val email = registerEmail.text.toString()
             val password = registerPassword.text.toString()
-
-            TODO("Send information to database")
+            Log.d("Test", "$name $surname $email $password $course")
         }
     }
 }
+
 
 
