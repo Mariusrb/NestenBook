@@ -38,23 +38,42 @@ class LoginScreen : AppCompatActivity() {
     private fun performLogin() {
         val email = loginEmail.text.toString()
         val password = registerName.text.toString()
-        val intent = Intent(this, LoginScreen::class.java)
-
+        val intent = Intent(this, MessageScreen::class.java)
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please enter Email and Password", Toast.LENGTH_SHORT).show()
         } else {
             var reqParam =
                 URLEncoder.encode("brukernavn", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
-            reqParam += "&" + URLEncoder.encode("passord", "UTF-8") + "=" + URLEncoder.encode(password,"UTF-8")
-            val myURL = URL("https://reworks.tech/gru/index.php?android=1&$reqParam")
+            reqParam += "&" + URLEncoder.encode("pwd", "UTF-8") + "=" + URLEncoder.encode(password,"UTF-8")
+            val myURL = URL("https://reworks.tech/gru/android/login.php?android=1&$reqParam")
 
             val request = Request.Builder().url(myURL).build()
             val client = OkHttpClient()
+            println(myURL)
             client.newCall(request).enqueue(object: Callback{
                 override fun onResponse(call: Call, response: Response) {
-                    val body = response.body?.toString()
+                    val body = response.body?.string()
                     println(body)
+                    if (body != null) {
+                        if(body.contains("true")){
+
+                            var userid: String = body[5].toString()
+                            userid += body[6].toString()
+                            userid += body[7].toString()
+                            userid += body[8].toString()
+                            userid += body[9].toString()
+                            userid += body[10].toString()
+                            userid += body[11].toString()
+
+                            println(userid)
+                            intent.putExtra("USER_ID", userid)
+                            startActivity(intent)
+                        }
+                        if (body.contains("false")){
+                            //do logging
+                        }
+                    }
                 }
                 override fun onFailure(call: Call, e: IOException) {
                     println("Failed to request")
